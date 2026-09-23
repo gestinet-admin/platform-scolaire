@@ -170,3 +170,24 @@ class Inscription(db.Model):
             'statut': self.statut,
             'date_inscription': self.date_inscription.isoformat(),
         }
+
+
+class PaiementFrais(db.Model):
+    """Enregistrement des paiements de frais scolaires"""
+    __tablename__ = 'paiements_frais'
+    
+    id = db.Column(db.Integer, primary_key=True)
+    inscription_id = db.Column(db.Integer, db.ForeignKey('inscriptions.id'), nullable=False)
+    enregistre_par_id = db.Column(db.Integer, db.ForeignKey('utilisateurs.id'), nullable=False)
+    montant = db.Column(db.Numeric(10, 2), nullable=False)
+    date_paiement = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    methode = db.Column(db.String(50))
+    reference = db.Column(db.String(100))
+    remarques = db.Column(db.Text)
+    date_creation = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    date_modification = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+    inscription = db.relationship('Inscription', backref='paiements')
+    enregistre_par = db.relationship('Utilisateur', backref='paiements_enregistres')
+    
+    def __repr__(self):
+        return f'<PaiementFrais {self.id}: {self.montant} CFA>'
