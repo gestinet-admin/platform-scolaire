@@ -67,3 +67,11 @@ def create_app(config_name=None):
 # Élèves routes
 from app.routes.eleves import bp as eleves_bp
 app.register_blueprint(eleves_bp)
+
+# Inscriptions routes
+from app.routes.inscriptions import bp as inscriptions_bp
+app.register_blueprint(inscriptions_bp)
+
+# Frais routes
+from app.routes.frais import bp as frais_bp
+app.register_blueprint(frais_bp)
