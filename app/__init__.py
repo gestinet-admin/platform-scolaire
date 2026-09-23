@@ -63,3 +63,7 @@ def create_app(config_name=None):
         return {'erreur': 'Erreur serveur interne'}, 500
     
     return app
+
+# Élèves routes
+from app.routes.eleves import bp as eleves_bp
+app.register_blueprint(eleves_bp)
