@@ -83,3 +83,7 @@ app.register_blueprint(views_bp)
 # Notifications routes
 from app.routes.notifications import bp as notifications_bp
 app.register_blueprint(notifications_bp)
+
+# Export routes
+from app.routes.export import bp as export_bp
+app.register_blueprint(export_bp)
