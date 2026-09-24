@@ -75,3 +75,11 @@ app.register_blueprint(inscriptions_bp)
 # Frais routes
 from app.routes.frais import bp as frais_bp
 app.register_blueprint(frais_bp)
+
+# Views routes (pages HTML)
+from app.routes.views import bp as views_bp
+app.register_blueprint(views_bp)
+
+# Notifications routes
+from app.routes.notifications import bp as notifications_bp
+app.register_blueprint(notifications_bp)

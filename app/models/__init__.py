@@ -191,3 +191,43 @@ class PaiementFrais(db.Model):
     
     def __repr__(self):
         return f'<PaiementFrais {self.id}: {self.montant} CFA>'
+
+
+class NotificationConfig(db.Model):
+    """Configuration des notifications pour une école"""
+    __tablename__ = 'notification_configs'
+    
+    id = db.Column(db.Integer, primary_key=True)
+    etablissement_id = db.Column(db.Integer, db.ForeignKey('etablissements.id'), nullable=False)
+    
+    # SMS
+    sms_actif = db.Column(db.Boolean, default=True)
+    sms_operateur = db.Column(db.String(50))  # orange, airtel, maroc_telecom, zain
+    sms_api_key = db.Column(db.String(255))  # Clé API chiffrée
+    sms_sender_id = db.Column(db.String(20))  # ID du sender
+    
+    # WhatsApp
+    whatsapp_actif = db.Column(db.Boolean, default=False)
+    whatsapp_api_key = db.Column(db.String(255))  # Clé API chiffrée
+    whatsapp_phone_id = db.Column(db.String(50))  # Numéro WhatsApp Business
+    
+    # Email
+    email_actif = db.Column(db.Boolean, default=False)
+    email_smtp_server = db.Column(db.String(100))
+    email_smtp_port = db.Column(db.Integer)
+    email_address = db.Column(db.String(100))
+    email_password = db.Column(db.String(255))  # Chiffrée
+    
+    # Préférences
+    alertes_impayés_actif = db.Column(db.Boolean, default=True)
+    relances_sms_groupes = db.Column(db.Boolean, default=True)
+    confirmations_inscription = db.Column(db.Boolean, default=True)
+    
+    # Audit
+    date_creation = db.Column(db.DateTime, default=datetime.utcnow)
+    date_modification = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+    
+    etablissement = db.relationship('Etablissement', backref='notification_config')
+    
+    def __repr__(self):
+        return f'<NotificationConfig {self.id}: {self.sms_operateur}>'
