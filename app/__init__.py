@@ -1,89 +1,63 @@
-"""
-Initialisation de l'application Flask
-"""
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate
 from flask_jwt_extended import JWTManager
 from flask_cors import CORS
-from config import get_config
+import os
 
-# Initialiser extensions
 db = SQLAlchemy()
-migrate = Migrate()
 jwt = JWTManager()
 
-
-def create_app(config_name=None):
-    """Factory pour créer l'app Flask"""
-    
+def create_app(config_name='production'):
     app = Flask(__name__)
     
     # Configuration
-    if config_name is None:
-        config = get_config()
+    if config_name == 'testing':
+        app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///:memory:'
+        app.config['TESTING'] = True
+        app.config['JWT_SECRET_KEY'] = 'test-secret-key'
     else:
-        from config import config as config_dict
-        config = config_dict.get(config_name, get_config())
+        # Production (Heroku)
+        database_url = os.getenv('DATABASE_URL', 'sqlite:///platform_scolaire.db')
+        if database_url.startswith('postgres://'):
+            database_url = database_url.replace('postgres://', 'postgresql://', 1)
+        app.config['SQLALCHEMY_DATABASE_URI'] = database_url
+        app.config['JWT_SECRET_KEY'] = os.getenv('JWT_SECRET_KEY', 'change-me-in-production')
     
-    app.config.from_object(config)
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     
-    # Initialiser extensions avec app
     db.init_app(app)
-    migrate.init_app(app, db)
     jwt.init_app(app)
-    CORS(app, origins=app.config['CORS_ORIGINS'])
+    CORS(app)
     
-    # Importer models (pour que SQLAlchemy les connaisse)
-    from app.models import Etablissement, Utilisateur, Eleve, Inscription
+    # Models
+    from app.models import Etablissement, Utilisateur, Eleve, Inscription, PaiementFrais, NotificationConfig
     
-    # Enregistrer blueprints (routes)
-    from app.routes.auth import auth_bp
-    app.register_blueprint(auth_bp, url_prefix='/api/auth')
+    # Auth routes
+    from app.routes.auth import bp as auth_bp
+    app.register_blueprint(auth_bp)
     
-    # Context CLI commands
-    @app.shell_context_processor
-    def make_shell_context():
-        return {
-            'db': db,
-            'Etablissement': Etablissement,
-            'Utilisateur': Utilisateur,
-            'Eleve': Eleve,
-            'Inscription': Inscription,
-        }
+    # Élèves routes
+    from app.routes.eleves import bp as eleves_bp
+    app.register_blueprint(eleves_bp)
     
-    # Erreurs handlers
-    @app.errorhandler(404)
-    def not_found(error):
-        return {'erreur': 'Ressource non trouvée'}, 404
+    # Inscriptions routes
+    from app.routes.inscriptions import bp as inscriptions_bp
+    app.register_blueprint(inscriptions_bp)
     
-    @app.errorhandler(500)
-    def internal_error(error):
-        db.session.rollback()
-        return {'erreur': 'Erreur serveur interne'}, 500
+    # Frais routes
+    from app.routes.frais import bp as frais_bp
+    app.register_blueprint(frais_bp)
+    
+    # Notifications routes
+    from app.routes.notifications import bp as notifications_bp
+    app.register_blueprint(notifications_bp)
+    
+    # Export routes
+    from app.routes.export import bp as export_bp
+    app.register_blueprint(export_bp)
+    
+    # Views routes
+    from app.routes.views import bp as views_bp
+    app.register_blueprint(views_bp)
     
     return app
-
-# Élèves routes
-from app.routes.eleves import bp as eleves_bp
-app.register_blueprint(eleves_bp)
-
-# Inscriptions routes
-from app.routes.inscriptions import bp as inscriptions_bp
-app.register_blueprint(inscriptions_bp)
-
-# Frais routes
-from app.routes.frais import bp as frais_bp
-app.register_blueprint(frais_bp)
-
-# Views routes (pages HTML)
-from app.routes.views import bp as views_bp
-app.register_blueprint(views_bp)
-
-# Notifications routes
-from app.routes.notifications import bp as notifications_bp
-app.register_blueprint(notifications_bp)
-
-# Export routes
-from app.routes.export import bp as export_bp
-app.register_blueprint(export_bp)
