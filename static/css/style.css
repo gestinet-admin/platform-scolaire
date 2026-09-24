@@ -1,0 +1,64 @@
+/* PlatformScolaire - Custom Styles */
+
+:root {
+    --primary: #1F4E78;
+    --secondary: #2E7D32;
+    --accent: #FFA500;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #f8f9fa 0%, #f0f4f8 100%);
+    min-height: 100vh;
+}
+
+.navbar {
+    background: linear-gradient(135deg, var(--primary) 0%, #1a3a52 100%);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.card-premium {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    border: 1px solid rgba(0,0,0,0.05);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-premium:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.12);
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    color: white;
+    padding: 12px 28px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: inline-block;
+    text-decoration: none;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(31, 78, 120, 0.3);
+}
+
+input, textarea, select {
+    border-radius: 8px !important;
+}
+
+input:focus, textarea:focus, select:focus {
+    outline: none !important;
+    ring: 2px !important;
+}

@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - PlatformScolaire{% endblock %}
+
+{% block content %}
+<div class="mb-8">
+    <h1 class="text-4xl font-bold text-gray-900 mb-2">Dashboard Établissement</h1>
+    <p class="text-gray-600">Bienvenue dans votre espace de gestion</p>
+</div>
+
+<!-- Stats Cards -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+    <div class="card-premium p-6">
+        <div class="flex items-center justify-between">
+            <div>
+                <p class="text-gray-600 text-sm font-semibold">Élèves Inscrits</p>
+                <p class="text-3xl font-bold text-gray-900 mt-2">248</p>
+            </div>
+            <div class="text-4xl opacity-20">👥</div>
+        </div>
+        <p class="text-xs text-green-600 mt-4">+12 cette semaine</p>
+    </div>
+
+    <div class="card-premium p-6">
+        <div class="flex items-center justify-between">
+            <div>
+                <p class="text-gray-600 text-sm font-semibold">Frais Encaissés</p>
+                <p class="text-3xl font-bold text-gray-900 mt-2">4.2M</p>
+            </div>
+            <div class="text-4xl opacity-20">💰</div>
+        </div>
+        <p class="text-xs text-green-600 mt-4">68% du total</p>
+    </div>
+
+    <div class="card-premium p-6">
+        <div class="flex items-center justify-between">
+            <div>
+                <p class="text-gray-600 text-sm font-semibold">Retards Frais</p>
+                <p class="text-3xl font-bold text-red-600 mt-2">32</p>
+            </div>
+            <div class="text-4xl opacity-20">⚠️</div>
+        </div>
+        <p class="text-xs text-red-600 mt-4">À relancer</p>
+    </div>
+
+    <div class="card-premium p-6">
+        <div class="flex items-center justify-between">
+            <div>
+                <p class="text-gray-600 text-sm font-semibold">Professeurs</p>
+                <p class="text-3xl font-bold text-gray-900 mt-2">18</p>
+            </div>
+            <div class="text-4xl opacity-20">🎓</div>
+        </div>
+        <p class="text-xs text-blue-600 mt-4">Tous actifs</p>
+    </div>
+</div>
+
+<!-- Quick Actions -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+    <div class="card-premium p-6">
+        <h2 class="text-lg font-bold text-gray-900 mb-4">Actions Rapides</h2>
+        <div class="space-y-3">
+            <a href="/eleves/new" class="btn-primary block text-center py-2">+ Ajouter Élève</a>
+            <a href="/inscriptions/new" class="bg-blue-100 text-blue-700 block text-center py-2 rounded font-semibold">+ Nouvelle Inscription</a>
+            <a href="/frais/relance-sms" class="bg-green-100 text-green-700 block text-center py-2 rounded font-semibold">📢 Relance SMS</a>
+        </div>
+    </div>
+
+    <div class="card-premium p-6">
+        <h2 class="text-lg font-bold text-gray-900 mb-4">Derniers Paiements</h2>
+        <div class="space-y-2 text-sm">
+            <div class="flex justify-between py-2 border-b">
+                <span>Ibrahim Mahamadou (3ème B)</span>
+                <span class="font-semibold text-green-600">+30,000 FCFA</span>
+            </div>
+            <div class="flex justify-between py-2 border-b">
+                <span>Amina Abdoulaye (3ème B)</span>
+                <span class="font-semibold text-green-600">+55,000 FCFA</span>
+            </div>
+            <div class="flex justify-between py-2">
+                <span>Fatima Issoufou (Terminale D)</span>
+                <span class="font-semibold text-green-600">+90,000 FCFA</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Navigation Cards -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <a href="/eleves" class="card-premium p-8 text-center hover:shadow-lg">
+        <div class="text-4xl mb-4">👥</div>
+        <h3 class="text-lg font-bold text-gray-900">Gestion Élèves</h3>
+        <p class="text-sm text-gray-600 mt-2">Ajouter, modifier, supprimer</p>
+    </a>
+
+    <a href="/inscriptions" class="card-premium p-8 text-center hover:shadow-lg">
+        <div class="text-4xl mb-4">📋</div>
+        <h3 class="text-lg font-bold text-gray-900">Inscriptions</h3>
+        <p class="text-sm text-gray-600 mt-2">Gérer les inscriptions annuelles</p>
+    </a>
+
+    <a href="/frais" class="card-premium p-8 text-center hover:shadow-lg">
+        <div class="text-4xl mb-4">💳</div>
+        <h3 class="text-lg font-bold text-gray-900">Gestion Frais</h3>
+        <p class="text-sm text-gray-600 mt-2">Paiements et recouvrements</p>
+    </a>
+</div>
+{% endblock %}
