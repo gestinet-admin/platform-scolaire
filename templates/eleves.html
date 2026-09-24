@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}Gestion Élèves - PlatformScolaire{% endblock %}
+
+{% block content %}
+<div class="mb-8 flex justify-between items-center">
+    <div>
+        <h1 class="text-4xl font-bold text-gray-900">Gestion Élèves</h1>
+        <p class="text-gray-600 mt-2">Ajouter, modifier, supprimer des élèves</p>
+    </div>
+    <button class="btn-primary">+ Ajouter Élève</button>
+</div>
+
+<div class="card-premium p-6">
+    <table class="w-full">
+        <thead>
+            <tr class="border-b-2 border-gray-200">
+                <th class="text-left py-3 font-semibold text-gray-900">Nom</th>
+                <th class="text-left py-3 font-semibold text-gray-900">Prénom</th>
+                <th class="text-left py-3 font-semibold text-gray-900">Classe</th>
+                <th class="text-left py-3 font-semibold text-gray-900">Frais Annuels</th>
+                <th class="text-left py-3 font-semibold text-gray-900">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="border-b hover:bg-gray-50">
+                <td class="py-4">TRAORÉ</td>
+                <td class="py-4">Amadou</td>
+                <td class="py-4">6ème A</td>
+                <td class="py-4">150,000 FCFA</td>
+                <td class="py-4"><button class="text-blue-600 hover:underline text-sm">Modifier</button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+{% endblock %}

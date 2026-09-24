@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block title %}Gestion Frais - PlatformScolaire{% endblock %}
+
+{% block content %}
+<div class="mb-8">
+    <h1 class="text-4xl font-bold text-gray-900">Gestion Frais Scolaires</h1>
+    <p class="text-gray-600 mt-2">Suivi des paiements et recouvrements</p>
+</div>
+
+<!-- Stats -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+    <div class="card-premium p-6">
+        <p class="text-gray-600 text-sm">Total Encaissé</p>
+        <p class="text-3xl font-bold text-green-600 mt-2">4.2M FCFA</p>
+        <p class="text-xs text-gray-600 mt-2">68% du total</p>
+    </div>
+
+    <div class="card-premium p-6">
+        <p class="text-gray-600 text-sm">Reste à Recouvrer</p>
+        <p class="text-3xl font-bold text-orange-600 mt-2">2M FCFA</p>
+        <p class="text-xs text-gray-600 mt-2">32% du total</p>
+    </div>
+
+    <div class="card-premium p-6">
+        <p class="text-gray-600 text-sm">En Retard</p>
+        <p class="text-3xl font-bold text-red-600 mt-2">32 élèves</p>
+        <p class="text-xs text-gray-600 mt-2">À relancer</p>
+    </div>
+</div>
+
+<!-- Actions -->
+<div class="card-premium p-6 mb-8">
+    <div class="flex gap-4">
+        <button class="btn-primary">+ Enregistrer Paiement</button>
+        <button class="bg-orange-100 text-orange-700 px-6 py-2 rounded font-semibold">📢 Relance SMS</button>
+    </div>
+</div>
+
+<!-- Derniers paiements -->
+<div class="card-premium p-6">
+    <h2 class="text-lg font-bold text-gray-900 mb-4">Derniers Paiements</h2>
+    <table class="w-full">
+        <thead>
+            <tr class="border-b-2 border-gray-200">
+                <th class="text-left py-3 font-semibold text-gray-900">Élève</th>
+                <th class="text-left py-3 font-semibold text-gray-900">Montant</th>
+                <th class="text-left py-3 font-semibold text-gray-900">Méthode</th>
+                <th class="text-left py-3 font-semibold text-gray-900">Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="border-b hover:bg-gray-50">
+                <td class="py-4">Ibrahim Mahamadou</td>
+                <td class="py-4 font-semibold text-green-600">+30,000 FCFA</td>
+                <td class="py-4">Airtel Money</td>
+                <td class="py-4">23 Sep 2024</td>
+            </tr>
+            <tr class="border-b hover:bg-gray-50">
+                <td class="py-4">Amina Abdoulaye</td>
+                <td class="py-4 font-semibold text-green-600">+55,000 FCFA</td>
+                <td class="py-4">Espèces</td>
+                <td class="py-4">22 Sep 2024</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+{% endblock %}
