@@ -308,3 +308,4 @@ Propriétaire - Tous droits réservés
 - [ ] Login testé avec admin@ecole.local / password123
 
 🚀 **Prêt à développer!**
+# Deploy fix
